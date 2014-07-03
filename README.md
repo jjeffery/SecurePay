@@ -7,6 +7,10 @@ The assembly currently only implements features that are used by our internal sy
 
 Features:
 
+[Secure XML API](http://www.securepay.com.au/uploads/Integration%20Guides/Secure_XML_API_Integration_Guide.pdf)
+
+* No messages supported yet -- see Periodic and Triggered add in for supported APIs. Support can be added easily if required.
+
 [Periodic and Triggered add in](http://www.securepay.com.au/uploads/Integration%20Guides/Secure_XML_API_Integration_Guide_with_Periodic_and_Triggered_add_in.pdf):
 
 * Add triggered payment
