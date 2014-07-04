@@ -72,6 +72,7 @@
     <Compile Include="Messages\SecurePayMessages.cs" />
     <Compile Include="Runtime\DateTimeOffsetExtensions.cs" />
     <Compile Include="Runtime\DateUtils.cs" />
+    <Compile Include="Runtime\IWebServiceClient.cs" />
     <Compile Include="SecurePayException.cs" />
     <Compile Include="Runtime\WebServiceClient.cs" />
   </ItemGroup>

@@ -9,9 +9,12 @@ using SecurePay.Messages;
 
 namespace SecurePay.Runtime
 {
-    public abstract class WebServiceClient
+    /// <summary>
+    /// Base class for web service clients. Contains common functionality for accessing the server.
+    /// </summary>
+    public abstract class WebServiceClient : IWebServiceClient
     {
-        public readonly ClientConfig Config;
+        public ClientConfig Config { get; private set; }
         private byte[] _lastRequest;
         private byte[] _lastResponse;
 
@@ -90,6 +93,12 @@ namespace SecurePay.Runtime
             }
         }
 
+        /// <summary>
+        /// Implemented by derived classes to provide the service endpoint URL. Different SecurePay
+        /// services have different absolute paths, though they share the same hostname in the URL.
+        /// For example the periodic endpoint has an absolute path of "/xmlapi/periodic" and the payment
+        /// endpoint has an absolute path of "/xmlapi/payment".
+        /// </summary>
         protected abstract Uri GetServiceUrl();
     }
 }
