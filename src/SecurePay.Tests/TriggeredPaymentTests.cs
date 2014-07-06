@@ -43,6 +43,9 @@ namespace SecurePay.Tests
                 Assert.AreEqual(true, triggerResponse.Successful);
                 Assert.AreEqual(3000, triggerResponse.Amount);
                 Assert.AreEqual("444433...111", triggerResponse.CreditCard.TruncatedCardNumber);
+                Assert.IsNotNull(triggerResponse.Receipt);
+                Assert.IsNotNull(triggerResponse.PoNum);
+                Assert.AreEqual("Visa", triggerResponse.CreditCard.CardDescription);
             }
             catch
             {

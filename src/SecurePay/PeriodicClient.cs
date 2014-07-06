@@ -93,6 +93,8 @@ namespace SecurePay
                 Amount =  periodicItem.Amount ?? 0,
                 Currency = periodicItem.Currency,
                 TransactionId = periodicItem.TransactionId,
+                Receipt = periodicItem.Receipt,
+                PoNum = periodicItem.PoNum,
                 SettlementDate = DateUtils.ParseYyyymmdd(periodicItem.SettlementDate),
             };
 
