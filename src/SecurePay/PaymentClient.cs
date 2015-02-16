@@ -8,7 +8,7 @@ namespace SecurePay
 {
 	public class PaymentClient : WebServiceClient, ISecurePayPayment
 	{
-		public PaymentClient(ClientConfig config) : base(config, "xml-4.2")
+		public PaymentClient(ClientConfig config = null) : base(config, "xml-4.2")
 		{
 		}
 
