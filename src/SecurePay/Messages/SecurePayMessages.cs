@@ -21,7 +21,7 @@ namespace SecurePay.Messages
         public int TimeoutValue = 60;
 
         [XmlElement("apiVersion")]
-        public string ApiVersion = "spxml-3.0";
+        public string ApiVersion;
     }
 
     public class MerchantInfo

@@ -28,9 +28,19 @@ namespace SecurePay.Runtime
             get { return Encoding.UTF8.GetString(_lastResponse); }
         }
 
-        protected WebServiceClient(ClientConfig config)
+		public string ApiVersion { get; protected set; }
+
+		public async Task<EchoResponseMessage> EchoAsync()
+		{
+			var echoRequestMessage = new EchoRequestMessage();
+			EchoResponseMessage response = await PostAsync<EchoRequestMessage, EchoResponseMessage>(echoRequestMessage);
+			return response;
+		}
+
+        protected WebServiceClient(ClientConfig config, string apiVersion)
         {
             Config = config ?? new ClientConfig();
+	        ApiVersion = apiVersion;
         }
 
         protected async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest requestMessage) 
@@ -42,6 +52,7 @@ namespace SecurePay.Runtime
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
             var url = GetServiceUrl();
 
+	        requestMessage.MessageInfo.ApiVersion = ApiVersion;
             requestMessage.MessageInfo.MessageId = Guid.NewGuid().ToString();
             requestMessage.MessageInfo.MessageTimestamp = DateTimeOffset.Now.ToSecurePayTimestampString();
             requestMessage.MerchantInfo.MerchantId = Config.MerchantId;

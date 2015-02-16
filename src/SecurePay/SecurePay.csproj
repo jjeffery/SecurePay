@@ -50,7 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISecurePayPayment.cs" />
+    <Compile Include="Messages\CommonMessages.cs" />
     <Compile Include="Messages\EchoMessages.cs" />
+    <Compile Include="Messages\PaymentMessages.cs" />
     <Compile Include="Messages\PeriodicMessages.cs" />
     <Compile Include="ISecurePayPeriodic.cs" />
     <Compile Include="Model\AddTriggeredPaymentRequest.cs" />
@@ -63,9 +66,12 @@
     <Compile Include="Model\PeriodicRequest.cs" />
     <Compile Include="Model\PeriodicResponse.cs" />
     <Compile Include="Model\PeriodicType.cs" />
+    <Compile Include="Model\StandardPaymentRequest.cs" />
+    <Compile Include="Model\StandardPaymentResponse.cs" />
     <Compile Include="Model\TriggerPaymentRequest.cs" />
     <Compile Include="Model\TriggerPaymentResponse.cs" />
     <Compile Include="Model\YearMonth.cs" />
+    <Compile Include="PaymentClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PeriodicClient.cs" />
     <Compile Include="ClientConfig.cs" />

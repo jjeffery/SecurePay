@@ -1,3 +1,6 @@
+using System.Threading.Tasks;
+using SecurePay.Messages;
+
 namespace SecurePay.Runtime
 {
     /// <summary>
@@ -6,5 +9,6 @@ namespace SecurePay.Runtime
     public interface IWebServiceClient
     {
         ClientConfig Config { get; }
+		Task<EchoResponseMessage> EchoAsync();
     }
 }

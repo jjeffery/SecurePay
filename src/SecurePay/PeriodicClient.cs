@@ -8,15 +8,8 @@ namespace SecurePay
 {
     public class PeriodicClient : WebServiceClient, ISecurePayPeriodic
     {
-        public PeriodicClient(ClientConfig config = null) : base(config)
+        public PeriodicClient(ClientConfig config = null) : base(config, "spxml-3.0")
         {
-        }
-
-        public async Task<EchoResponseMessage> EchoAsync()
-        {
-            var echoRequestMessage = new EchoRequestMessage();
-            EchoResponseMessage response = await PostAsync<EchoRequestMessage, EchoResponseMessage>(echoRequestMessage);
-            return response;
         }
 
         public async Task<AddTriggeredPaymentResponse> AddTriggeredPaymentAsync(AddTriggeredPaymentRequest request)
