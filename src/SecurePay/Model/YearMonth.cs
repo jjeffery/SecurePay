@@ -11,6 +11,7 @@ namespace SecurePay.Model
         public readonly int Month;
 
         public static readonly Regex Regex = new Regex(@"^\s*(\d{1,2})\s*/\s*(\d{1,4})\s*$");
+	    public static readonly YearMonth Zero = default(YearMonth);
 
         public YearMonth(int year, int month)
         {
