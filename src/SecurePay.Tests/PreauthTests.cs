@@ -1,0 +1,119 @@
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SecurePay.Model;
+
+namespace SecurePay.Tests
+{
+	[TestClass]
+	public class PreauthTests
+	{
+		public string PurchaseOrder;
+		public ClientConfig Config;
+		public PaymentClient Client;
+		public int PaymentAmount;
+		public string CardNumber;
+		public YearMonth Expires;
+		public string Ccv;
+
+		[TestInitialize]
+		public void TestInitialize()
+		{
+			Config = new ClientConfig().SetupForTesting();
+			Client = new PaymentClient(Config);
+
+			PurchaseOrder = "XYRIS-" + DateTime.Now.Ticks;
+			PaymentAmount = 100;
+			CardNumber = "4444333322221111";
+			Expires = new YearMonth(DateTime.Today.Year + 1, DateTime.Today.Month);
+			Ccv = "123";
+		}
+
+		[TestMethod]
+		public async Task SuccessfulPreauth()
+		{
+			var response = await Preauth();
+
+			try {
+				Assert.AreEqual(true, response.Approved);
+				Assert.AreEqual("444433...111", response.CreditCard.TruncatedCardNumber);
+				Assert.AreEqual("00", response.ResponseCode);
+				Assert.AreEqual("Approved", response.ResponseText);
+				LogMessages();
+			}
+			catch (Exception ex) {
+				LogMessages();
+				throw;
+			}
+		}
+
+		[TestMethod]
+		public async Task InsufficientFunds()
+		{
+			PaymentAmount = 3051;
+			var response = await Preauth(false);
+
+			try {
+				Assert.AreEqual(false, response.Approved);
+				Assert.AreEqual("444433...111", response.CreditCard.TruncatedCardNumber);
+				Assert.AreEqual("51", response.ResponseCode);
+				Assert.AreEqual("Insufficient Funds", response.ResponseText);
+			}
+			catch {
+				LogMessages();
+				throw;
+			}
+		}
+
+		[TestMethod]
+		public async Task IncorrectCardNumber()
+		{
+			CardNumber = "1234567890123456";
+			var response = await Preauth(false);
+
+			try {
+				Assert.AreEqual(false, response.Approved);
+				Assert.AreEqual("123456...456", response.CreditCard.TruncatedCardNumber);
+				Assert.AreEqual("101", response.ResponseCode);
+				Assert.AreEqual("Invalid Credit Card Number", response.ResponseText);
+			}
+			catch {
+				LogMessages();
+				throw;
+			}
+		}
+
+		private async Task<PreauthResponse> Preauth(bool expectSuccess = true)
+		{
+			var request = new PreauthRequest {
+				Amount = PaymentAmount,
+				PurchaseOrder = PurchaseOrder,
+				CreditCard = new CreditCardRequest {
+					CardNumber = CardNumber,
+					Expires = Expires,
+					Cvv = Ccv,
+				}
+			};
+
+			try {
+				var response = await Client.PreauthAsync(request);
+				Assert.AreEqual(expectSuccess, response.Approved);
+				return response;
+			}
+			catch {
+				LogMessages();
+				throw;
+			}
+		}
+
+		private void LogMessages()
+		{
+			Console.WriteLine("Request:");
+			Console.WriteLine("========");
+			Console.WriteLine(Client.LastRequest);
+			Console.WriteLine("Response:");
+			Console.WriteLine("=========");
+			Console.WriteLine(Client.LastResponse);
+		}
+	}
+}

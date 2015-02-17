@@ -44,6 +44,7 @@
     <Compile Include="DateTimeOffsetExtensionTests.cs" />
     <Compile Include="DateUtilsTests.cs" />
     <Compile Include="EchoTests.cs" />
+    <Compile Include="PreauthTests.cs" />
     <Compile Include="StandardPaymentTests.cs" />
     <Compile Include="TriggeredPaymentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

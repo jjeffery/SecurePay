@@ -18,7 +18,7 @@ namespace SecurePay.Messages
 		[XmlElement("pan")]
 		public string TruncatedCreditCardNumber;
 		[XmlElement("cardType")]
-		public int CardType;
+		public int? CardType;
 		[XmlElement("cardDescription")]
 		public string CardDescription;
 		[XmlElement("recurringFlag")]

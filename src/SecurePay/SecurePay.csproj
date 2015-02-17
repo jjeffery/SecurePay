@@ -66,6 +66,7 @@
     <Compile Include="Model\PeriodicRequest.cs" />
     <Compile Include="Model\PeriodicResponse.cs" />
     <Compile Include="Model\PeriodicType.cs" />
+    <Compile Include="Model\PreauthRequest.cs" />
     <Compile Include="Model\StandardPaymentRequest.cs" />
     <Compile Include="Model\StandardPaymentResponse.cs" />
     <Compile Include="Model\TriggerPaymentRequest.cs" />
