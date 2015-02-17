@@ -72,5 +72,63 @@ namespace SecurePay.Model
         {
             return HasValue ? string.Format("{0:00}/{1:0000}", Month, Year) : string.Empty;
         }
+
+	    public override int GetHashCode()
+	    {
+		    return Year*100 + Month;
+	    }
+
+	    public override bool Equals(object obj)
+	    {
+		    if (obj is YearMonth)
+		    {
+			    var other = (YearMonth) obj;
+			    return other.Year == Year && other.Month == Month;
+		    }
+		    return false;
+	    }
+
+	    public static bool operator ==(YearMonth ym1, YearMonth ym2)
+	    {
+		    return ym1.Year == ym2.Year && ym1.Month == ym2.Month;
+	    }
+
+		public static bool operator !=(YearMonth ym1, YearMonth ym2)
+		{
+			return ym1.Year != ym2.Year || ym1.Month != ym2.Month;
+		}
+
+	    public static bool operator <(YearMonth ym1, YearMonth ym2)
+	    {
+		    if (ym1.Year == ym2.Year)
+		    {
+			    return ym1.Month < ym2.Month;
+		    }
+		    return ym1.Year < ym2.Year;
+	    }
+
+		public static bool operator >(YearMonth ym1, YearMonth ym2)
+		{
+			if (ym1.Year == ym2.Year) {
+				return ym1.Month > ym2.Month;
+			}
+			return ym1.Year > ym2.Year;
+		}
+
+		public static bool operator <=(YearMonth ym1, YearMonth ym2)
+		{
+			if (ym1.Year == ym2.Year) {
+				return ym1.Month <= ym2.Month;
+			}
+			return ym1.Year < ym2.Year;
+		}
+
+		public static bool operator >=(YearMonth ym1, YearMonth ym2)
+		{
+			if (ym1.Year == ym2.Year) {
+				return ym1.Month >= ym2.Month;
+			}
+			return ym1.Year > ym2.Year;
+		}
     }
 }
