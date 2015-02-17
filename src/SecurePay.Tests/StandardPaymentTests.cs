@@ -39,7 +39,9 @@ namespace SecurePay.Tests
 				Assert.AreEqual("444433...111", response.CreditCard.TruncatedCardNumber);
 				Assert.AreEqual("00", response.ResponseCode);
 				Assert.AreEqual("Approved", response.ResponseText);
-			}
+		        Assert.IsFalse(string.IsNullOrWhiteSpace(response.TransactionId));
+		        //LogMessages();
+	        }
 	        catch (Exception ex)
 	        {
 		        LogMessages();
