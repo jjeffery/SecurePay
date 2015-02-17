@@ -54,5 +54,94 @@ namespace SecurePay.Tests
                 Assert.AreEqual(td.Text, yearMonth.ToString());
             }
         }
+
+	    [TestMethod]
+	    public void Equality()
+	    {
+		    var equalTestData = new[] {
+			    "01/2001",
+			    "12/2072",
+		    };
+
+		    foreach (var date in equalTestData)
+		    {
+			    var ym1 = new YearMonth(date);
+			    var ym2 = new YearMonth(date);
+
+			    Assert.IsTrue(ym1.Equals(ym2));
+			    Assert.IsTrue(ym2.Equals(ym1));
+			    Assert.IsTrue(ym1 == ym2);
+				Assert.IsTrue(ym2 == ym1);
+				Assert.IsFalse(ym1 != ym2);
+				Assert.IsFalse(ym2 != ym1);
+
+			    Assert.IsTrue(ym1 <= ym2);
+			    Assert.IsTrue(ym2 <= ym1);
+				Assert.IsTrue(ym1 >= ym2);
+				Assert.IsTrue(ym2 >= ym1);
+			}
+	    }
+
+		[TestMethod]
+		public void Inequality()
+		{
+			var equalTestData = new[] {
+			    new { Date1 = "01/2091", Date2 = "02/2092" },
+			    new { Date1 = "01/2081", Date2 = "01/2082" },
+			    new { Date1 = "01/2071", Date2 = "11/2071" },
+		    };
+
+			foreach (var testData in equalTestData) {
+				var ym1 = new YearMonth(testData.Date1);
+				var ym2 = new YearMonth(testData.Date2);
+
+				Assert.IsFalse(ym1.Equals(ym2));
+				Assert.IsFalse(ym2.Equals(ym1));
+				Assert.IsFalse(ym1 == ym2);
+				Assert.IsFalse(ym2 == ym1);
+				Assert.IsTrue(ym1 != ym2);
+				Assert.IsTrue(ym2 != ym1);
+			}
+		}
+
+		[TestMethod]
+		public void LessThan()
+		{
+			var equalTestData = new[] {
+			    new { Date1 = "01/2091", Date2 = "02/2092" },
+			    new { Date1 = "12/2081", Date2 = "01/2082" },
+			    new { Date1 = "01/2071", Date2 = "11/2071" },
+		    };
+
+			foreach (var testData in equalTestData) {
+				var ym1 = new YearMonth(testData.Date1);
+				var ym2 = new YearMonth(testData.Date2);
+
+				Assert.IsTrue(ym1 < ym2);
+				Assert.IsFalse(ym2 < ym1);
+				Assert.IsTrue(ym1 <= ym2);
+				Assert.IsFalse(ym2 <= ym1);
+			}
+		}
+
+		[TestMethod]
+		public void GreaterThan()
+		{
+			var equalTestData = new[] {
+			    new { Date1 = "02/2092", Date2 = "01/2092" },
+			    new { Date1 = "01/2082", Date2 = "12/2081" },
+			    new { Date1 = "9/2071", Date2 = "8/2071" },
+		    };
+
+			foreach (var testData in equalTestData) {
+				var ym1 = new YearMonth(testData.Date1);
+				var ym2 = new YearMonth(testData.Date2);
+
+				Assert.IsTrue(ym1 > ym2);
+				Assert.IsFalse(ym2 > ym1);
+				Assert.IsTrue(ym1 >= ym2);
+				Assert.IsFalse(ym2 >= ym1);
+			}
+		}
     }
 }
