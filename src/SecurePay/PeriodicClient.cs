@@ -74,7 +74,8 @@ namespace SecurePay
             var periodicItem = requestMessage.Periodic.PeriodicList.PeriodicItem;
             periodicItem.ActionType = "trigger";
             periodicItem.ClientId = request.ClientId;
-
+            periodicItem.Amount = request.Amount;
+            periodicItem.TransactionReference = request.TransactionReference;
             var responseMessage = await PostAsync<PeriodicRequestMessage, PeriodicResponseMessage>(requestMessage);
             periodicItem = responseMessage.Periodic.PeriodicList.PeriodicItem;
 

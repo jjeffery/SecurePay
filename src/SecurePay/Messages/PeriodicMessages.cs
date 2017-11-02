@@ -79,6 +79,9 @@ namespace SecurePay.Messages
         [XmlElement("txnID")]
         public string TransactionId;
 
+        [XmlElement("transactionReference")]
+        public string TransactionReference;
+
         [XmlElement("receipt")] 
         public string Receipt;
 
